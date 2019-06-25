@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="wcm.io"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+
+    <description>PMD static code analysis rule set</description>
+
+    <!-- Exclude test classes -->
+    <exclude-pattern>.*/src/test/.*</exclude-pattern>
+    <!-- Exclude target folder that may contain generated sources -->
+    <exclude-pattern>.*/target/.*</exclude-pattern>
+
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="AbstractClassWithoutAbstractMethod"/>
+    </rule>
+
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="AssignmentInOperand"/>
+    </rule>
+
+    <rule ref="category/java/design.xml">
+    </rule>
+
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="AvoidDollarSigns"/>
+        <exclude name="AtLeastOneConstructor"/>
+    </rule>
+
+    <rule ref="category/java/security.xml"></rule>
+
+    <rule ref="category/java/performance.xml"></rule>
+
+    <rule ref="category/java/documentation.xml/CommentRequired">
+        <properties>
+            <property name="enumCommentRequirement" value="Required"/>
+            <property name="fieldCommentRequirement" value="Ignored"/>
+            <property name="headerCommentRequirement" value="Ignored"/>
+            <property name="publicMethodCommentRequirement" value="Ignored"/>
+            <property name="protectedMethodCommentRequirement" value="Ignored"/>
+        </properties>
+    </rule>
+</ruleset>
