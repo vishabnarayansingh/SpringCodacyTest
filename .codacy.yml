@@ -1,0 +1,5 @@
+engines:
+  spotbugs:
+    enabled: true
+    modules:
+      -sourceDirectories:  [ "/src/main" ]
