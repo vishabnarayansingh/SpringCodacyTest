@@ -11,7 +11,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -21,11 +23,14 @@ import com.vn.react.modal.Blog;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static org.springframework.data.mongodb.core.aggregation.ArrayOperators.arrayOf;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest( webEnvironment=  SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SpringCodacyTest {
+@SpringApplicationConfiguration()
+public class SpringCodacyTests {
 
 		@Autowired
 		private WebTestClient webTestClient;
