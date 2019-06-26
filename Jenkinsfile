@@ -8,8 +8,7 @@ pipeline{
 	}
 	environment {
 		CODACY_PROJECT_TOKEN = credentials('CODACY_TAVANT_GITHUB')
-		DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
-		//CODACY_API_BASE_URL="http://10.131.146.120:16006"
+
 	}
 	options {
 		skipDefaultCheckout true
@@ -22,6 +21,8 @@ pipeline{
 				script{
 					def scm = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
 					echo "${scm}"
+					env.GIT_COMMIT = scm.GIT_COMMIT
+					echo "${env.GIT_COMMIT}"
 				}
 			}
 		}
@@ -51,27 +52,7 @@ pipeline{
 				}
 			}
 		}
-		stage('SonarQube Analysis'){
-			steps{
-				withSonarQubeEnv('Sonar6.7') {
-					sh  "mvn sonar:sonar"
-				}
-				script{
-					timeout(time:20, unit: 'MINUTES') {
-						def qg = waitForQualityGate abortPipeline: true
-						if (qg.status != 'OK') {
-							error "Pipeline aborted due to quality gate failure: ${qg.status}"
-						}
-					}
-				}
-			}
-			post {
-				failure {
-					script {currentBuild.result = 'FAILURE'}
-					sendMail('Sonar Quality Gate Failed !!!')
-				}
-			}
-		}
+
 		stage('Upload Test Coverage For Codacy '){
 			steps{
 				sh '''
@@ -82,7 +63,8 @@ pipeline{
                     .[0].browser_download_url')"
                  '''
 				sh "chmod +x codacy-coverage-reporter"
-				sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
+//				sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
+				sh "./codacy-coverage-reporter report -l Java --commit-uuid ${env.GIT_COMMIT} -r target/site/jacoco/jacoco.xml"
 
 
 			}
@@ -95,30 +77,7 @@ pipeline{
 				}
 			}
 		}
-		/* stage('Spotbugs'){
-            steps{
-                sh "curl -L https://github.com/codacy/codacy-analysis-cli/archive/master.tar.gz | tar xvz"
-                sh "cd codacy-analysis-cli-* && make install"
-                sh "codacy-analysis-cli analyse  --project-token 4572774becfe4a89963dc16b2e500a69 --tool SpotBugs  --directory /src/main --upload --verbose"
-                //sh "codacy-analysis-cli analyse --directory src/main --project-token 4572774becfe4a89963dc16b2e500a69 --allow-network --codacy-api-base-url http://10.131.146.120 --upload --verbose"
-            }
-        } */
 
-		/* stage('Build Docker Image') {
-             steps {
-                 echo 'Building Docker Image ...'
-                 sh "mvn -DskipTests=true dockerfile:build"
-             }
-             post {
-                 failure {
-                     echo 'Docker Build Image  has  failed. See logs for details.'
-                     script {
-                         currentBuild.result = 'FAILURE'
-                     }
-                     sendMail('Build Docker Image Failed !!!!!!!')
-                 }
-             }
-         }*/
 
 	}
 	post {
