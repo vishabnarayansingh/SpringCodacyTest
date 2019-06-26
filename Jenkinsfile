@@ -20,7 +20,7 @@ pipeline{
 			steps{
 				sh "git clean -fdx"
 				script{
-					def scm = checkout([$class: 'GitSCM', branches: [[name: '*/codacy']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
+					def scm = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
 					echo "${scm}"
 				}
 			}
