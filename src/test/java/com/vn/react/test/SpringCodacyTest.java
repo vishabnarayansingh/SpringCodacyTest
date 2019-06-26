@@ -2,7 +2,6 @@ package com.vn.react.test;
 
 import java.util.Collections;
 
-import javax.xml.ws.RespectBinding;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
@@ -33,7 +32,7 @@ public class SpringCodacyTest {
 	
 		@Autowired
 		private BlogRepository blogRepository;
-		
+
 		@Test
 		public void test1CreateBlog(){
 			Blog blog = new Blog("Core Java","Blog For Genrices","VISHABSINGH");
