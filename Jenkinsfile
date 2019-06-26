@@ -11,11 +11,18 @@ pipeline{
 		DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
 		//CODACY_API_BASE_URL="http://10.131.146.120:16006"
 	}
+	options {
+		skipDefaultCheckout true
+	}
 
 	stages{
-		stage('Clean Workspace'){
+		stage('CheckOut'){
 			steps{
 				sh "git clean -fdx"
+				script{
+					def scm = checkout([$class: 'GitSCM', branches: [[name: '*/codacy']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
+					echo "${scm}"
+				}
 			}
 		}
 		stage('Build'){
