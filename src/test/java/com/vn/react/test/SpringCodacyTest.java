@@ -97,8 +97,6 @@ public class SpringCodacyTest {
 					});
 	}
 
-	
-	// SONAR CHANGES
 	@Test
 	public void test6DeleteRecord() {
 		Blog blogDB = blogRepository.findByAuthor("VISHABSINGH").next().block();
