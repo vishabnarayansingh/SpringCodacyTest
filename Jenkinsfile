@@ -9,13 +9,10 @@ pipeline{
 		jdk "JAVA_HOME"
 	}
 	environment {
-		CODACY_PROJECT_TOKEN = credentials('CODACY_PROJECT_TOKEN_RECTIVE_ENTERPRISE')
-		DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
-		CODACY_API_BASE_URL="http://10.131.146.120:16006"
+		//CODACY_PROJECT_TOKEN = credentials('CODACY_PROJECT_TOKEN_RECTIVE_ENTERPRISE')
+		//DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
+		//CODACY_API_BASE_URL="http://10.131.146.120:16006"
 
-	}
-	options {
-		gitLabConnection('tavant-gitlab')
 	}
 
 	stages{
