@@ -8,8 +8,8 @@ pipeline{
 		jdk "JAVA_HOME"
 	}
 	environment {
-		//CODACY_PROJECT_TOKEN = credentials('CODACY_PROJECT_TOKEN_RECTIVE_ENTERPRISE')
-		//DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
+		CODACY_PROJECT_TOKEN = credentials('CODACY_TAVANT_GITHUB')
+		DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
 		//CODACY_API_BASE_URL="http://10.131.146.120:16006"
 	}
 
