@@ -2,7 +2,7 @@ package com.vn.react.duplicatecode;
 
 public class CheckCodeDuplication {
 
-    int factorial(int number){
+    public int  factorial(int number){
         if(number < 1){
             return 1;
         }else{
@@ -10,7 +10,7 @@ public class CheckCodeDuplication {
         }
     }
 
-    void function(int number) {
+    public void function(int number) {
         if(number == 0)
             return;
 
