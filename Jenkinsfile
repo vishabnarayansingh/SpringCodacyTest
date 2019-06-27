@@ -111,7 +111,7 @@ def publishHTMLReports(reportDirectory,reportFileName,reportName) {
 }
 def sendMail(mail_subject ){
 	emailext attachLog: false,
-			body: '${JELLY_SCRIPT,template="jenkins-html-custom"}',
+			body: '${JELLY_SCRIPT,template="jenkins-jelly-template"}',
 			recipientProviders: [developers(), requestor()],
 			mimeType: 'text/html' ,
 			subject: mail_subject
