@@ -14,13 +14,14 @@ pipeline{
 	options {
 		skipDefaultCheckout true
 	}
-	stages{
-		stage('Checkout'){
+  stages{
+		stage('CheckOut'){
 			steps{
+				sh "git clean -fdx"
 				script{
-					def scmVar = checkout([$class: 'GitSCM', branches: [[name: '*/codacy']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
-					echo "${scmVar}"
-					env.GIT_COMMIT = scmVar.GIT_COMMIT
+					def scm = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
+					echo "${scm}"
+					env.GIT_COMMIT = scm.GIT_COMMIT
 					echo "${env.GIT_COMMIT}"
 				}
 			}
@@ -61,10 +62,8 @@ pipeline{
                     .[0].browser_download_url')"
                  '''
 				sh "chmod +x codacy-coverage-reporter"
-				//sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
-				sh "./codacy-coverage-reporter report -l Java --commit-uuid  ${env.GIT_COMMIT} -r target/site/jacoco/jacoco.xml"
-
-
+//				sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
+				sh "./codacy-coverage-reporter report -l Java --commit-uuid ${env.GIT_COMMIT} -r target/site/jacoco/jacoco.xml"
 			}
 			post {
 				failure {
