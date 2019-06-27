@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class CheckTest {
 
-    CheckCodeDuplication test =null;
+   /* CheckCodeDuplication test =null;
 
     @Before
     public void testBefore(){
@@ -22,5 +22,5 @@ public class CheckTest {
     @Test
     public void testFib2(){
          // Assert.assertEquals(test.factorial(2),10);
-    }
+    } */
 }
