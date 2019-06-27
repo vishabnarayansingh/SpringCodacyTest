@@ -19,8 +19,9 @@ public class CheckTest {
        //Assert.assertEquals(test.fibonacci4(3),2);
 
     }
-    @Test
-    public void testFib2(){
+//    @Test
+  //  public void testFib2(){
          // Assert.assertEquals(test.factorial(2),10);
-    } 
+
+    //}
 }
