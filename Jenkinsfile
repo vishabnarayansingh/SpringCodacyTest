@@ -15,9 +15,8 @@ pipeline{
 		skipDefaultCheckout true
 	}
 	stages{
-		stage('Clean Workspace'){
+		stage('Checkout'){
 			steps{
-				sh "git clean -fdx"
 				script{
 					def scmVar = checkout([$class: 'GitSCM', branches: [[name: '*/codacy']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
 					echo "${scmVar}"
