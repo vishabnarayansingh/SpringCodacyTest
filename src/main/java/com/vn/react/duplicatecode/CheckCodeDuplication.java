@@ -1,6 +1,7 @@
 package com.vn.react.duplicatecode;
 
-public class CheckCodeDuplicaiton2 {
+public class CheckCodeDuplication1 {
+
     int factorial(int number){
         if(number < 1){
             return 1;
@@ -42,10 +43,11 @@ public class CheckCodeDuplicaiton2 {
         }
         return fibonacci(number - 1) + fibonacci(number - 2);
     }
-    int fibonacci4(int number) {
+    public int fibonacci4(int number) {
         if ( number <= 1) {
             return number;
         }
         return fibonacci(number - 1) + fibonacci(number - 2);
     }
+
 }
