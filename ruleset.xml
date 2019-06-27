@@ -26,6 +26,9 @@
     <rule ref="category/java/codestyle.xml">
         <exclude name="AvoidDollarSigns"/>
         <exclude name="AtLeastOneConstructor"/>
+        <exclude name="MethodArgumentCouldBeFinal"/>
+        <exclude name="ShortVariable"/>
+        <exclude name="UseUtilityClass"/>
     </rule>
 
     <rule ref="category/java/security.xml"></rule>

@@ -95,6 +95,7 @@ pipeline{
 	post {
 		success{
 			sendMail('All Stages Executed Sucessfully !!')
+			echo 'All Stages Executed .... !!!'
 		}
 	}
 }

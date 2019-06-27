@@ -74,7 +74,7 @@ public class BlogController {
 	}
 	
 	@ExceptionHandler(WebClientResponseException.class)
-    public ResponseEntity<String> handleWebClientResponseException(WebClientResponseException exception) {
+    public ResponseEntity<String> handleWebClientResponseException(final WebClientResponseException exception) {
         return ResponseEntity.status(exception.getRawStatusCode()).body(exception.getResponseBodyAsString());
     }
 
