@@ -48,7 +48,7 @@ public class SpringCodacyTests {
 					.jsonPath("$.content").isEqualTo("Blog For Genrices");
 		}
 
-	@Test
+/*	@Test
 	public void test2GetAllBlogs() {
 		webTestClient.get().uri("/blog/find")
 				.accept(MediaType.APPLICATION_JSON_UTF8)
@@ -96,7 +96,7 @@ public class SpringCodacyTests {
 						Assertions.assertThat(resp.getResponseBody()).isNotEmpty();
 					});
 	}
-
+*/
 	@Test
 	public void test6DeleteRecord() {
 		Blog blogDB = blogRepository.findByAuthor("VISHABSINGH").next().block();
