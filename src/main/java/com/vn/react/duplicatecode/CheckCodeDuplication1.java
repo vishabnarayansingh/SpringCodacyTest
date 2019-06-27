@@ -1,6 +1,6 @@
 package com.vn.react.duplicatecode;
 
-public class DuplicateCodeClass {
+public class CheckCodeDuplication1 {
 
     int factorial(int number){
         if(number < 1){
