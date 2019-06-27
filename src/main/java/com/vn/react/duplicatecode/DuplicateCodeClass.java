@@ -1,6 +1,6 @@
 package com.vn.react.duplicatecode;
 
-public class RecursionFunction {
+public class DuplicateCodeClass {
 
     int factorial(int number){
         if(number < 1){

@@ -1,4 +1,4 @@
-package com.vn.react.duplicatecode;
+package com.vn.react;
 
 public class RecursionFunction {
 
