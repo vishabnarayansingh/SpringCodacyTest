@@ -8,7 +8,7 @@ public class CheckTest {
 
     @Test
     public void testFib(){
-        CheckCodeDuplication test = new CheckCodeDuplication();
-        Assert.assertEquals(test.fibonacci4(3),2);
+        //CheckCodeDuplication test = new CheckCodeDuplication();
+       // Assert.assertEquals(test.fibonacci4(3),2);
     }
 }
