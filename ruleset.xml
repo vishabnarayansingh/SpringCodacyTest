@@ -21,6 +21,7 @@
 
     <rule ref="category/java/design.xml">
         <exclude name="LawOfDemeter"/>
+        <exclude name="UseUtilityClass"/>
     </rule>
 
     <rule ref="category/java/codestyle.xml">
@@ -28,7 +29,6 @@
         <exclude name="AtLeastOneConstructor"/>
         <exclude name="MethodArgumentCouldBeFinal"/>
         <exclude name="ShortVariable"/>
-        <exclude name="UseUtilityClass"/>
     </rule>
 
     <rule ref="category/java/security.xml"></rule>
