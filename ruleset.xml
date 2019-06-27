@@ -20,6 +20,7 @@
     </rule>
 
     <rule ref="category/java/design.xml">
+        <exclude name="LawOfDemeter"/>
     </rule>
 
     <rule ref="category/java/codestyle.xml">

@@ -52,8 +52,8 @@ public class BlogController {
 	}
 
 	@PutMapping("/{id}")
-	public Mono<ResponseEntity<Blog>> update(@RequestBody BlogFliter blogFliter,@PathVariable final  String id){
-		return blogService.updateBlog(blogFliter.blogFliterToBlog(blogFliter),id)
+	public Mono<ResponseEntity<Blog>> update(@RequestBody final BlogFliter blogFliter,@PathVariable final String blogId){
+		return blogService.updateBlog(blogFliter.blogFliterToBlog(blogFliter),blogId)
 				.map(updatedBlog -> new ResponseEntity<>(updatedBlog,HttpStatus.OK))
 				.defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
@@ -74,8 +74,8 @@ public class BlogController {
 	}
 	
 	@ExceptionHandler(WebClientResponseException.class)
-    public ResponseEntity<String> handleWebClientResponseException(WebClientResponseException ex) {
-        return ResponseEntity.status(ex.getRawStatusCode()).body(ex.getResponseBodyAsString());
+    public ResponseEntity<String> handleWebClientResponseException(WebClientResponseException exception) {
+        return ResponseEntity.status(exception.getRawStatusCode()).body(exception.getResponseBodyAsString());
     }
 
 }
