@@ -9,7 +9,7 @@ pipeline{
 	environment {
 		CODACY_PROJECT_TOKEN = credentials('CODACY_TAVANT_GITHUB')
 		DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
-		//CODACY_API_BASE_URL="http://10.131.146.120:16006"
+		CODACY_API_BASE_URL="https://api.codacy.com"
 	}
 	options {
 		skipDefaultCheckout true
@@ -62,7 +62,7 @@ pipeline{
                  '''
 				sh "chmod +x codacy-coverage-reporter"
 				//sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
-				sh "./codacy-coverage-reporter report -l Java --commit-uuid \"${env.GIT_COMMIT}\" -r target/site/jacoco/jacoco.xml"
+				sh "./codacy-coverage-reporter report -l Java --commit-uuid  ${env.GIT_COMMIT} -r target/site/jacoco/jacoco.xml"
 
 
 			}
