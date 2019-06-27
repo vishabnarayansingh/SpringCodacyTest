@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories
 @EnableMongoAuditing
 public class SpringCodacyCheck {
-
     public static void main(String[] args) {
         SpringApplication.run(SpringCodacyCheck.class, args);
     }
