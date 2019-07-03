@@ -23,7 +23,7 @@ pipeline{
 					def completeHash  = getCompleteHash()
 					echo "*********************************** HASH ***************"
 					echo "${completeHash}"
-					
+					echo "*********************************** ***************"
 					def scm = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
 					echo "${scm}"
 					env.GIT_COMMIT = scm.GIT_COMMIT
