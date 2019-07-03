@@ -22,15 +22,16 @@ pipeline{
 				
         				def commitSha = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
           				println("commitSha: ${commitSha}")
-					
-					def sha = sh(returnStdout:true, script:'git log --pretty=format:\'%H\' -n 1')
-					println("Commit SHA With LOgs : ${sha}")
         
 					echo "*********************************** ***************"
 					def scm = checkout([$class: 'GitSCM', branches: [], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
 					echo "${scm}"
 					env.GIT_COMMIT = scm.GIT_COMMIT
 					echo "${env.GIT_COMMIT}"
+					
+					echo "==========================================="
+					def sha = sh(returnStdout:true, script:'git log --pretty=format:\'%H\' -n 1')
+					println("Commit SHA With Logs : ${sha}")
 				}
 			}
 		}
