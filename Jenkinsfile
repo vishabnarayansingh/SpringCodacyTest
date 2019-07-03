@@ -22,6 +22,9 @@ pipeline{
 				
         				def commitSha = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
           				println("commitSha: ${commitSha}")
+					
+					def sha = sh(returnStdout:true, script:'git log --pretty=format:'%H' -n 1')
+					println("Commit SHA With LOgs : ${sha}")
         
 					echo "*********************************** ***************"
 					def scm = checkout([$class: 'GitSCM', branches: [], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
