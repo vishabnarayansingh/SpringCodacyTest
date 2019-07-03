@@ -23,7 +23,7 @@ pipeline{
         				def commitSha = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
           				println("commitSha: ${commitSha}")
 					
-					def sha = sh(returnStdout:true, script:'git log --pretty=format:'%H' -n 1')
+					def sha = sh(returnStdout:true, script:'git log --pretty=format:\'%H\' -n 1')
 					println("Commit SHA With LOgs : ${sha}")
         
 					echo "*********************************** ***************"
