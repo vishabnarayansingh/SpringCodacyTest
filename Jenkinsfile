@@ -19,10 +19,10 @@ pipeline{
 			steps{
 				sh "git clean -fdx"
 				script{
-					
-					def completeHash  = getCompleteHash()
-					echo "*********************************** HASH ***************"
-					echo "${completeHash}"
+				
+        				def commitSha = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+          				println("commitSha: ${commitSha}")
+        
 					echo "*********************************** ***************"
 					def scm = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
 					echo "${scm}"
