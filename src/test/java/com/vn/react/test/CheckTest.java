@@ -14,11 +14,11 @@ public class CheckTest {
         test = new CheckCodeDuplication();
     }
 
-    @Test
+  /*  @Test
     public void testFib(){
        //Assert.assertEquals(test.fibonacci4(3),2);
 
-    }
+    }*/
 //    @Test
   //  public void testFib2(){
          // Assert.assertEquals(test.factorial(2),10);
