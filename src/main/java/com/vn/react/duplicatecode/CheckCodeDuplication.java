@@ -13,7 +13,6 @@ public class CheckCodeDuplication {
     public void function(int number) {
         if(number == 0)
             return;
-
         function(number/2);
         System.out.print("%d" + number);
     }
@@ -26,6 +25,11 @@ public class CheckCodeDuplication {
         return fibonacci(number - 1) + fibonacci(number - 2);
     }
 
-
+   public int fibonacci1(int number) {
+        if ( number <= 1) {
+            return number;
+        }
+        return fibonacci1(number - 1) + fibonacci1(number - 2);
+    }
 
 }
