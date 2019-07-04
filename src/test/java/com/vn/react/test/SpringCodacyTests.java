@@ -33,7 +33,7 @@ public class SpringCodacyTests {
 		@Autowired
 		private BlogRepository blogRepository;
 
-/*		@Test
+		@Test
 		public void test1CreateBlog(){
 			Blog blog = new Blog("Core Java","Blog For Genrices","VISHABSINGH");
 			webTestClient.post().uri("/blog")
@@ -103,6 +103,6 @@ public class SpringCodacyTests {
 		webTestClient.delete().uri("/blog/{id}",Collections.singletonMap("id",blogDB.getId()))
 		.exchange()
 		.expectStatus().isOk();
-	} */
+	}
 
 }

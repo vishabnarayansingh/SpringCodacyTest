@@ -20,17 +20,16 @@ pipeline{
 				sh "git clean -fdx"
 				script{
 				
-        				def commitSha = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-          				println("commitSha: ${commitSha}")
-        
-					echo "*********************************** ***************"
+					def commitSha = getCompleteSHA()
+					println("commitSha: ${commitSha}")
+
 					def scm = checkout([$class: 'GitSCM', branches: [[name: '**']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
 					echo "${scm}"
 					env.GIT_COMMIT = scm.GIT_COMMIT
 					echo "${env.GIT_COMMIT}"
 					
-					echo "==========================================="
-					def sha = sh(returnStdout:true, script:'git log --pretty=format:\'%H\' -n 1')
+
+					def sha = getShaHash()
 					println("Commit SHA With Logs : ${sha}")
 				}
 			}
@@ -124,8 +123,11 @@ def sendMail(mail_subject ){
 			mimeType: 'text/html' ,
 			subject: mail_subject
 }
-def getCompleteHash() {
+def getCompleteSHA() {
     return sh(returnStdout: true, script: "git rev-parse HEAD").trim()
 }
 
+def getShaHash(){
+	return sh(returnStdout:true, script:'git log --pretty=format:\'%H\' -n 1').trim();
+}
 
