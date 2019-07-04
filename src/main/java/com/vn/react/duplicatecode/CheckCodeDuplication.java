@@ -25,27 +25,27 @@ public class CheckCodeDuplication {
         return fibonacci(number - 1) + fibonacci(number - 2);
     }
 
-    int fibonacci11(int number) {
-        if ( number <= 1) {
-            return number;
-        }
-        return fibonacci11(number - 1) + fibonacci11(number - 2);
-    }
-
-   public int fibonacci1(int number) {
+    int fibonacci1(int number) {
         if ( number <= 1) {
             return number;
         }
         return fibonacci1(number - 1) + fibonacci1(number - 2);
     }
 
-
-
-    public int fibonacci12(int number) {
+    public int fibonacci2(int number) {
         if ( number <= 1) {
             return number;
         }
-        return fibonacci12(number - 1) + fibonacci12(number - 2);
+        return fibonacci2(number - 1) + fibonacci2(number - 2);
+    }
+
+
+
+    public int fibonacci3(int number) {
+        if ( number <= 1) {
+            return number;
+        }
+        return fibonacci3(number - 1) + fibonacci3(number - 2);
     }
 
 }
