@@ -82,7 +82,7 @@ pipeline{
 				}
 			}
 		}
-		stage('Build Docker Image') {
+	/*	stage('Build Docker Image') {
              steps {
                  echo 'Building Docker Image ...'
                  sh "mvn -DskipTests=true dockerfile:build"
@@ -96,7 +96,7 @@ pipeline{
                      sendMail('Build Docker Image Failed !!!!!!!')
                  }
              }
-         }
+         }*/
 
 	}
 	post {
