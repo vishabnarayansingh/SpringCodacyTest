@@ -251,7 +251,7 @@ public class DuplicateCode1 {
         int average_b = sum_b / 4;
 
     }
-    public void showDuplicate15() {
+    public void showDuplicate16() {
 
         int sum_a = 0;
 
