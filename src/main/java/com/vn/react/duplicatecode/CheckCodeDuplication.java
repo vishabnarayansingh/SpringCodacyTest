@@ -2,36 +2,6 @@ package com.vn.react.duplicatecode;
 
 public class CheckCodeDuplication {
 
-    public int  factorial(int number){
-        if(number < 1){
-            return 1;
-        }else{
-            return number * factorial(number -1);
-        }
-    }
-
-    public void function(int number) {
-        if(number == 0)
-            return;
-        function(number/2);
-        System.out.print("%d" + number);
-    }
-
-
-    int fibonacci(int number) {
-        if ( number <= 1) {
-            return number;
-        }
-        return fibonacci(number - 1) + fibonacci(number - 2);
-    }
-
-    int fibonacci1(int number) {
-        if ( number <= 1) {
-            return number;
-        }
-        return fibonacci1(number - 1) + fibonacci1(number - 2);
-    }
-
     private int array_a[] = new int[5];
     private  int array_b[] =new int [5];
 
@@ -189,7 +159,7 @@ public class CheckCodeDuplication {
 
     }
 
-    public void showDuplicate105() {
+/*    public void showDuplicate105() {
 
         int sum_a = 0;
 
@@ -270,6 +240,6 @@ public class CheckCodeDuplication {
 
         int average_b = sum_b / 4;
 
-    }
+    }*/
 
 }
