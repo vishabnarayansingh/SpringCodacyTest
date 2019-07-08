@@ -238,8 +238,38 @@ public class CheckCodeDuplication {
         int average_b = sum_b / 4;
 
     }
+    public void showDuplicate16() {
 
+        int sum_a = 0;
 
+        for (int i = 0; i < 4; i++)
+            sum_a += array_a[i];
 
+        int average_a = sum_a / 4;
+
+        int sum_b = 0;
+        for (int i = 0; i < 4; i++)
+            sum_b += array_b[i];
+
+        int average_b = sum_b / 4;
+
+    }
+
+    public void showDuplicate17() {
+
+        int sum_a = 0;
+
+        for (int i = 0; i < 4; i++)
+            sum_a += array_a[i];
+
+        int average_a = sum_a / 4;
+
+        int sum_b = 0;
+        for (int i = 0; i < 4; i++)
+            sum_b += array_b[i];
+
+        int average_b = sum_b / 4;
+
+    }
 
 }
