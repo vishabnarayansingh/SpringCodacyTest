@@ -16,7 +16,6 @@ pipeline{
 					echo "${scm}"
 					env.GIT_COMMIT = scm.GIT_COMMIT
 					echo "${env.GIT_COMMIT}"
-					sh 'docker images'
 				}
 			}
 		}
