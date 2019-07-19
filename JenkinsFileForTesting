@@ -23,7 +23,8 @@ pipeline{
 				 steps {                 
 				 	withMaven(jdk: 'JAVA_HOME', maven: 'M2_HOME') {    
 					   sh "mvn --version"
-				 	   sh "mvn clean verify"              
+				 	   sh "mvn clean verify" 
+					   sh "docker images"
 				 	}            
 				 }
 		}
