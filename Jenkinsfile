@@ -8,7 +8,7 @@ pipeline{
 	}
 	environment {
 		CODACY_PROJECT_TOKEN = credentials('CODACY_TAVANT_GITHUB')
-		DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
+		//DOCKER = credentials('DOCKER-HUB-CREDENTIALS')
 		CODACY_API_BASE_URL="https://api.codacy.com"
 	}
 	options {
@@ -17,7 +17,7 @@ pipeline{
   stages{
 		stage('CheckOut'){
 			steps{
-				sh "git clean -fdx"
+			
 				script{
 				
 					def commitSha = getCompleteSHA()
