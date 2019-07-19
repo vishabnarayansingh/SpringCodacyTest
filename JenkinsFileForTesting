@@ -23,8 +23,8 @@ pipeline{
 			steps{
 				//sh  "mvn clean package -DskipTests"
 				 steps {                 
-				 	withMaven(jdk: 'JAVA_HOME', maven: 'M2_HOME', options: [artifactsPublisher(disabled: true)]) {      
-				 	sh "mvn clean package -DskipTests=true"                 
+				 	withMaven(jdk: 'JAVA_HOME', maven: 'M2_HOME') {      
+				 	   sh "mvn clean verify"              
 				 	}            
 				 }
 			}
