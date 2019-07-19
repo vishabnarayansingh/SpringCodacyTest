@@ -29,6 +29,7 @@ pipeline{
 		stage('Test') {
 			steps {
 				sh 'mvn test surefire-report:report'
+				sh 'docker images'
         		junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 					jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
 			}
