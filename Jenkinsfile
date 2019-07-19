@@ -3,7 +3,7 @@ pipeline{
 		label "master"
 	}
 	tools{
-		maven "Maven-3.3.9"
+		maven "M2_HOME"
 		jdk "JAVA_HOME"
 	}
 	environment {
