@@ -16,6 +16,7 @@ pipeline{
 					echo "${scm}"
 					env.GIT_COMMIT = scm.GIT_COMMIT
 					echo "${env.GIT_COMMIT}"
+					sh 'docker images'
 				}
 			}
 		}
@@ -26,14 +27,6 @@ pipeline{
 				 	   sh "mvn clean verify"              
 				 	}            
 				 }
-		}
-		stage('Test') {
-			steps {
-				sh 'mvn test surefire-report:report'
-				sh 'docker images'
-        		junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
-					jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
-			}
 		}
 	
 	}
