@@ -73,8 +73,7 @@ pipeline{
 					script{
 						currentBuild.result = 'FAILURE'
 					}
-					//sendMail('Upload Coverage for Codacy !!!!! ')
-					echo "Failed !! UPLOAD Coverage for Codacy"
+					sendMail('Upload Coverage for Codacy !!!!! ')
 				}
 			}
 		}
@@ -83,7 +82,7 @@ pipeline{
 	}
 	post {
 		success{
-			//sendMail('All Stages Executed Sucessfully !!')
+			sendMail('All Stages Executed Sucessfully !!')
 		}
 	}
 }
