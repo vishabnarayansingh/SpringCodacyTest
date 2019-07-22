@@ -19,10 +19,6 @@ pipeline{
 			steps{
 			
 				script{
-				
-					def commitSha = getCompleteSHA()
-					println("commitSha: ${commitSha}")
-
 					def scm = checkout([$class: 'GitSCM', branches: [[name: '**']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/naryansingh/SpringCodacyTest.git']]])
 					echo "${scm}"
 					env.GIT_COMMIT = scm.GIT_COMMIT
@@ -31,6 +27,9 @@ pipeline{
 
 					def sha = getShaHash()
 					println("Commit SHA With Logs : ${sha}")
+					
+					def commitSha = getCompleteSHA()
+					println("commitSha: ${commitSha}")
 				}
 			}
 		}
