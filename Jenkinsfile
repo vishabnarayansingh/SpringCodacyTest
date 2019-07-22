@@ -8,6 +8,7 @@ pipeline{
 	}
 	environment {
 		CODACY_PROJECT_TOKEN = credentials('CODACY_TAVANT_GITHUB')
+		CODACY_API_BASE_URL="https://api.codacy.com"
 
 	}
 	options {
