@@ -4,7 +4,7 @@ pipeline{
 	}
 	tools{
 		maven "M2_HOME"
-		jdk "JAVA_HOME"
+		//jdk "JAVA_HOME"
 	}
 	environment {
 		CODACY_PROJECT_TOKEN = credentials('CODACY_TAVANT_GITHUB')
