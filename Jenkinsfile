@@ -9,7 +9,9 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -B'
+                 withMaven(options: [artifactsPublisher(disabled: true)]){
+                    sh 'mvn test surefire-report:report'
+                 }
             }
         }
     }
