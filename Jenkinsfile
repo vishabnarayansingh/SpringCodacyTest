@@ -50,10 +50,10 @@ pipeline {
          stage('STEP') {
             input {
                 message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
+                ok "OKK"
+                submitter "Vishab Singh"
                 parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                    string(name: 'PERSON', defaultValue: 'Jenkins Input ', description: 'Who should I say hello to?')
                 }
             }
             steps {
