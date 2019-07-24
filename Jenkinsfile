@@ -21,5 +21,13 @@ pipeline {
                 sh 'java -version'
             }
         }
+        stage("INSIDE"){
+            steps{
+               docker.image('maven:3.3.3-jdk-8').inside {
+                  git 'https://github.com/vishabnarayansingh/SpringCodacyTest.git'
+                  sh 'mvn -B clean install'
+                }   
+            }
+        }
     }
 }
