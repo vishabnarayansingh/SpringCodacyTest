@@ -4,9 +4,9 @@ pipeline{
 		maven "M2_HOME"
 		jdk "JAVA_HOME"
 	}
-	options {
+	/*options {
 		skipDefaultCheckout true
-	}
+	} */
 
 	stages{
 		stage('CheckOut'){
