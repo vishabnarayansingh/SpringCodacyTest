@@ -1,6 +1,6 @@
 pipeline {
     agent none
-    parameters {
+  /*  parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
 
         text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
@@ -12,7 +12,7 @@ pipeline {
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
 
         file(name: "FILE", description: "Choose a file to upload")
-    }
+    } */
     stages {
         stage('Build') {
             agent {
@@ -34,7 +34,7 @@ pipeline {
                 sh 'java -version'
             }
         }
-         stage('Example') {
+         /*stage('Example') {
             steps {
                 echo "Hello ${params.PERSON}"
 
@@ -46,7 +46,7 @@ pipeline {
 
                 echo "Password: ${params.PASSWORD}"
             }
-        }
+        } */
          stage('STEP') {
             input {
                 message "Should we continue?"
@@ -58,6 +58,19 @@ pipeline {
             }
             steps {
                 echo "Hello, ${PERSON}, nice to meet you."
+            }
+        }
+         stage('Example Deploy') {
+            when {
+                beforeInput true
+                branch 'master'
+            }
+            input {
+                message "Deploy to master?"
+                id "simple-input"
+            }
+            steps {
+                echo 'Deploying'
             }
         }
     }
