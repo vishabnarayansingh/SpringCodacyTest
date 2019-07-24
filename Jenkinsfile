@@ -14,5 +14,12 @@ pipeline {
                  }
             }
         }
+        stage('JDK') {
+            agent { docker 'openjdk:8-jre' } 
+            steps {
+                echo 'Hello, JDK'
+                sh 'java -version'
+            }
+        }
     }
 }
