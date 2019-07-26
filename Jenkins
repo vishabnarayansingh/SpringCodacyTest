@@ -1,0 +1,145 @@
+#!groovy
+
+pipeline {
+
+    agent {
+        label "slave"
+    }
+
+    environment {
+        APP_NAME = "finexpapigateway"
+        CURRENT_IMAGE_VERSION = "latest"
+		CODACY_PROJECT_TOKEN = credentials('CODACY_FINEXP_APIGATEWAY')
+		CODACY_API_BASE_URL="https://api.codacy.com"
+    }
+
+  /*  triggers {
+        gitlab(triggerOnPush: true, branchFilterType: 'All', secretToken: "d3fb19c4515e33296ebd5ef5d62ad74b", ciSkip: false)
+    } */
+
+    options {
+       // gitLabConnection('tavant-gitlab')
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        disableConcurrentBuilds()
+        timeout(time: 1, unit: 'HOURS')
+    }
+
+    stages {
+
+        stage('Build') {
+	     agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }
+            steps {
+                withMaven(jdk: 'JAVA_HOME', maven: 'Maven-3.3.9', options: [artifactsPublisher(disabled: true)]) {
+                    sh "mvn clean package -DskipTests=true"
+                }
+            }
+        }
+		
+		stage ('Test'){
+         	steps{
+				sh "mvn test -Dmaven.test.failure.ignore=true surefire-report:report"    
+			}
+			post {
+				failure {
+					script {currentBuild.result = 'FAILURE'}
+					sendMail('Test Build Failed !!!!!')
+				}
+				always {
+					junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
+					jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
+				}
+			}
+        }
+        stage('Upload Test Coverage For Codacy'){
+			steps{
+				sh '''
+                    curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest |
+                    jq -r '.assets |
+                    map({name, browser_download_url} |
+                    select(.name | contains("codacy-coverage-reporter-linux"))) |
+                    .[0].browser_download_url')"
+                 '''
+				sh "chmod +x codacy-coverage-reporter"
+				script{
+				    def commitHash = getCompleteHash()
+				    sh "./codacy-coverage-reporter report -l Java --commit-uuid ${commitHash} -r target/site/jacoco/jacoco.xml"
+				}	
+			}
+			post {
+				failure {
+					script{currentBuild.result = 'FAILURE'}
+					sendMail('Failed To Upload Code Coverage for Codacy !!!!! ')
+				}
+			}
+	  }
+        stage('Releasing from feature branch') {
+            steps {
+                script {
+                    docker.withRegistry('http://pennymac-repo.tavant.com') {
+                        serviceImage = docker.build("pennymac-repo.tavant.com/finexp/${APP_NAME}")
+                        CURRENT_IMAGE_VERSION = generateFeatureTag()
+                        echo "pushing ${CURRENT_IMAGE_VERSION}"
+                        serviceImage.push(CURRENT_IMAGE_VERSION)
+                    }
+                }
+            }
+        }
+
+        stage('Updating the tracker repository with new versions') {
+            steps {
+                script {
+                    def encodedBranchName = encodeString(env.BRANCH_NAME)
+                    build job: "PennyMac-BDL-Dev-Pipeline/PennyMac-BDL-tracker-update/${encodedBranchName}", parameters: [string(name: 'FEATURE_BRANCH_NAME', value: env.BRANCH_NAME), string(name: 'CURRENT_TAG', value: CURRENT_IMAGE_VERSION), string(name: 'SHA', value: getCompleteHash()), string(name: 'SERVICE_NAME', value: APP_NAME)]
+                }
+            }
+        }
+
+    }
+    post {
+        success {
+            sendMail("${CURRENT_IMAGE_VERSION} - All Stages Executed Successfully")
+        }
+        failure {
+            sendMail("Build failed!!!")
+        }
+    }
+}
+
+def encodeString(str) {
+    return str.replace("@", "%40").replace("/", "%2F")
+}
+
+def generateFeatureTag() {
+    return getLastGitTag("origin/master") + "-" + getShortCommitHash() + "-" + "${BUILD_NUMBER}"
+}
+
+def generateReleaseTag() {
+    /*Assume all changes are minor for now*/
+    return getLastGitTag("origin/master") + "-" + getShortCommitHash() + "-" + "${BUILD_NUMBER}"
+}
+
+def getShortCommitHash() {
+    return sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+}
+
+def getCompleteHash() {
+    return sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+}
+
+def getLastGitTag(branch) {
+    return sh(returnStdout: true, script: "git describe " + branch + "  --abbrev=0 --tags").trim()
+}
+
+
+def sendMail(mail_subject) {
+    emailext attachLog: false,
+            body: '${JELLY_SCRIPT,template="html-with-health-and-console"}',
+            recipientProviders: [developers()],
+            mimeType: 'text/html',
+            subject: "[Jenkins Build] ${APP_NAME}-${mail_subject}"
+}
