@@ -69,3 +69,43 @@ credentials:
                 directEntry:
                   privateKey: ${SSH_PRIVATE_KEY}
 ```
+
+## JSCOS
+```yaml
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          description: ""
+          id: "github-user1"
+          password: ${github_pass}
+          scope: SYSTEM
+          username: ${github_user}
+      - usernamePassword:
+          description: "admin_2"
+          id: "admin_2"
+          password: ${GIT_USER}
+          scope: GLOBAL
+          username: ${GIT_PASSWORD}
+      - basicSSHUserPrivateKey:
+          id: "SSH_KEY_1"
+          privateKeySource:
+            directEntry:
+              privateKey: "{AQAAABAAAAAQBefw0aT3YvLvHaUTTUFMN6Q6bfzL139cScuoW3lEV2M=}"
+          scope: GLOBAL
+          username: "root"
+      - basicSSHUserPrivateKey:
+          id: "SSH_KEY_1_System"
+          privateKeySource:
+            directEntry:
+              privateKey: "{AQAAABAAAAAQUdLgCrzihqyaZnsxdSzujEErIvIN/bFMoHoWA2KFqm4=}"
+          scope: SYSTEM
+          username: "root"
+      - string:
+          description: "Secret_test_1"
+          id: "Secret_test_1"
+          scope: GLOBAL
+          secret: "{AQAAABAAAAAQ64NYthA7iWRFsxGtJHMmCWDvnTnIM/gZLVb/f51RLBo=}"
+```
+
