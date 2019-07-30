@@ -16,7 +16,7 @@ pipeline {
                 sh 'mvn --version'
                 sh 'mvn -B'
                 
-                 withMaven(mavenSettingsConfig: 'my-maven-settings'){
+                 withMaven(globalMavenSettingsConfig: 'my-maven-settings'){
                     //sh 'mvn deploy -Dmaven.test.skip=true'
                       sh "mvn -s settings.xml clean deploy"
                  }
