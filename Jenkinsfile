@@ -9,9 +9,9 @@ pipeline {
                 }
             }
             steps {
-                 withMaven(options: [artifactsPublisher(disabled: true)]){
+                /* withMaven(options: [artifactsPublisher(disabled: true)]){
                     sh 'mvn test surefire-report:report'
-                 }
+                 }*/
                 
                 echo "DELOY "
                  withMaven(options: [artifactsPublisher(disabled: false)]){
