@@ -1,7 +1,7 @@
 pipeline {
     agent none
     environment {
-       
+       NEXUS_CREDENTIALS = credentials('nexus')
     }
     stages {
         stage('Build & Deploy') {
