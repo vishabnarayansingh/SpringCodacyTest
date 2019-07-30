@@ -109,3 +109,36 @@ credentials:
           secret: "{AQAAABAAAAAQ64NYthA7iWRFsxGtJHMmCWDvnTnIM/gZLVb/f51RLBo=}"
 ```
 
+### artifactory plugin
+- Artifactory plugin configuration belongs under unclassified root element
+
+```yaml
+unclassified:
+  artifactorybuilder:
+    useCredentialsPlugin: true
+    artifactoryServers:
+      - serverId: artifactory
+        artifactoryUrl: http://acme.com/artifactory
+        deployerCredentialsConfig:
+          credentialsId: "artifactory"
+        resolverCredentialsConfig:
+          username: artifactory_user
+          password: ${ARTIFACTORY_PASSWORD}
+
+```
+
+```yaml
+unclassified:
+  artifactorybuilder:
+    useCredentialsPlugin: true
+    artifactoryServers:
+      - serverId: my-artifactory
+        artifactoryUrl: http://localhost:8081/repository/RELEASE/
+        deployerCredentialsConfig:
+          credentialsId: "artifactory-id"
+        resolverCredentialsConfig:
+          username: admin
+          password: ${ARTIFACTORY_PASSWORD}
+
+```
+
