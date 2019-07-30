@@ -66,8 +66,8 @@
 	</dependencies>
 	<distributionManagement>
 		<repository>
-			<id>broker-repo</id>
-			<url>http://localhost:8081/repository/RELEASE/</url>
+			<id>repoId</id>
+			<url>http://10.131.155.57:8081/repository/RELEASE/</url>
 		</repository>
 	</distributionManagement>
 	<build>
@@ -215,11 +215,11 @@
 	<repositories>
 		<repository>
 			<id>groupId</id>
-			<url>http://localhost:8081/repository/mavengroup/</url>
+			<url>http://10.131.155.57:8081/repository/mavengroup/</url>
 		</repository>
 		<repository>
 			<id>relsease</id>
-			<url>http://localhost:8081/repository/RELEASE/</url>
+			<url>http://10.131.155.57:8081/repository/RELEASE/</url>
 		</repository>
 	</repositories>
 </project>
