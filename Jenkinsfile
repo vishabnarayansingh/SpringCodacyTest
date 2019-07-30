@@ -12,10 +12,7 @@ pipeline {
                    /*configFileProvider([configFile(fileId: 'my-maven-settings', variable: 'SETTINGS')]) {
                     sh "mvn -s $SETTINGS deploy -DskipTests"
                 }*/
-                
-                sh 'mvn --version'
-                sh 'mvn -B'
-                
+              
                  withMaven(globalMavenSettingsConfig: 'my-maven-settings'){
                     //sh 'mvn deploy -Dmaven.test.skip=true'
                       sh "mvn -s settings.xml clean deploy"
