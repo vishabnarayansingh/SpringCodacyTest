@@ -1,7 +1,7 @@
 pipeline {
     agent none
     stages {
-        stage('Build') {
+        stage('Build & Deploy') {
             agent {
                 docker {
                     image 'maven:3-alpine'
@@ -11,6 +11,11 @@ pipeline {
             steps {
                  withMaven(options: [artifactsPublisher(disabled: true)]){
                     sh 'mvn test surefire-report:report'
+                 }
+                
+                echo "DELOY "
+                 withMaven(options: [artifactsPublisher(disabled: false)]){
+                    sh 'mvn clean deploy -Dmaven.test.skip=true'
                  }
             }
         }
