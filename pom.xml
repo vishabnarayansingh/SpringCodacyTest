@@ -64,6 +64,12 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>broker-repo</id>
+			<url>http://localhost:8081/repository/RELEASE/</url>
+		</repository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -206,4 +212,14 @@
             </plugin>
         </plugins>
 	</reporting>
+	<repositories>
+		<repository>
+			<id>groupId</id>
+			<url>http://localhost:8081/repository/mavengroup/</url>
+		</repository>
+		<repository>
+			<id>relsease</id>
+			<url>http://localhost:8081/repository/RELEASE/</url>
+		</repository>
+	</repositories>
 </project>
