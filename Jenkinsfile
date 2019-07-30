@@ -15,7 +15,7 @@ pipeline {
               
                  withMaven(globalMavenSettingsConfig: 'my-maven-settings'){
                     //sh 'mvn deploy -Dmaven.test.skip=true'
-                      sh "mvn clean deploy -s /root/.m2/my-settings.xml"
+                    //  sh "mvn clean deploy -s /root/.m2/my-settings.xml"
                       sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
                       
                  }
