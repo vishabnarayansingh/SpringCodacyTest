@@ -15,7 +15,8 @@ pipeline {
                 
                 echo "DELOY "
                  withMaven(mavenSettingsConfig: 'my-maven-settings'){
-                    sh 'mvn deploy -Dmaven.test.skip=true'
+                    //sh 'mvn deploy -Dmaven.test.skip=true'
+                      sh "mvn -s settings.xml clean deploy"
                  }
             }
         }
