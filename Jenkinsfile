@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    environment {
+       
+    }
     stages {
         stage('Build & Deploy') {
             agent {
@@ -16,7 +19,9 @@ pipeline {
                  withMaven(globalMavenSettingsConfig: 'my-maven-settings'){
                     //sh 'mvn deploy -Dmaven.test.skip=true'
                     //  sh "mvn clean deploy -s /root/.m2/my-settings.xml"
-                      sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
+                    //  sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
+                    sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/my-settings.xml"
+                     
                       
                  }
             }
