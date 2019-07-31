@@ -21,8 +21,8 @@ pipeline {
                 }
                 } */           
                  withMaven(globalMavenSettingsConfig: 'maven-settings'){
-                    sh 'mvn deploy -Dmaven.test.skip=true'
-                    //  sh "mvn clean deploy -s /root/.m2/settings.xml"
+                   // sh 'mvn deploy -Dmaven.test.skip=true'
+                     sh "mvn clean deploy -s /root/.m2/settings.xml"
                     //sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
        
                     //sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/settings.xml"
