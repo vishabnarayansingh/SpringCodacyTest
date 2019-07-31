@@ -14,10 +14,10 @@ pipeline {
             steps {
                 
                  withMaven(globalMavenSettingsConfig: 'maven-settings'){
-                     //
-                     sh "mvn clean package -DskipTests"
+                    
+                     //sh "mvn clean package -DskipTests"
                     //sh 'mvn deploy -Dmaven.test.skip=true'
-                    //  sh "mvn clean deploy -s /root/.m2/my-settings.xml"
+                    //  sh "mvn clean deploy -s /root/.m2/settings.xml"
                     //  sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
                     echo "############### MAVEN DEPLOY ##########"
                     sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/settings.xml"
