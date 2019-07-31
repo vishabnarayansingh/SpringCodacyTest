@@ -12,7 +12,7 @@ pipeline {
                sh "mvn clean package -DskipTests" 
             }
         } */
-        stage('Deploy') {
+        stage('Deploy To Nexus') {
             steps {
                   /*agent {
                 docker {
@@ -21,9 +21,9 @@ pipeline {
                 }
                 } */     
                 
-                /*configFileProvider([configFile(fileId: 'bf894b35-0554-479b-9521-187b8545178d', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                configFileProvider([configFile(fileId: 'bf894b35-0554-479b-9521-187b8545178d', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
                     sh 'mvn -gs $MAVEN_GLOBAL_SETTINGS deploy'
-                }*/
+                }
                 
                  withMaven(globalMavenSettingsConfig: 'ae44493d-0903-4274-b6f4-ef1995f2e0af'){
                      //mavenSettingsConfig
