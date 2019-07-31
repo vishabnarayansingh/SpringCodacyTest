@@ -25,7 +25,7 @@ pipeline {
                     sh 'mvn -gs $MAVEN_GLOBAL_SETTINGS deploy'
                 }*/
                 
-                 withMaven(globalMavenSettingsConfig: 'bf894b35-0554-479b-9521-187b8545178d'){
+                 withMaven(globalMavenSettingsConfig: 'ae44493d-0903-4274-b6f4-ef1995f2e0af'){
                      //mavenSettingsConfig
                      //globalMavenSettingsConfig
                    // sh 'mvn deploy -Dmaven.test.skip=true'
