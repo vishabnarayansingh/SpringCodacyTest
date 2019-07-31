@@ -66,7 +66,7 @@
 	</dependencies>
 	<distributionManagement>
 		<repository>
-			<id>repoId</id>
+			<id>repo-release</id>
 			<url>http://10.131.155.57:8081/repository/RELEASE/</url>
 		</repository>
 	</distributionManagement>
@@ -112,6 +112,16 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<extensions>true</extensions>
+				<configuration>
+				    <serverId>repo-release</serverId>
+				    <skipStaging>true</skipStaging>
+				</configuration>
+			 </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -214,11 +224,11 @@
 	</reporting>
 	<repositories>
 		<repository>
-			<id>groupId</id>
+			<id>repo-release</id>
 			<url>http://10.131.155.57:8081/repository/mavengroup/</url>
 		</repository>
 		<repository>
-			<id>relsease</id>
+			<id>repo-release</id>
 			<url>http://10.131.155.57:8081/repository/RELEASE/</url>
 		</repository>
 	</repositories>
