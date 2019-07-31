@@ -33,7 +33,7 @@ pipeline {
                     //sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
                      echo "##### ${WORKSPACE}"
                      sh 'export PATH=$MVN_CMD:$PATH && mvn help:effective-settings'
-                     sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/MyGlobalSettings-settings.xml"
+                     sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/settings.xml"
                     //sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/settings.xml"
                                        
                  }
