@@ -224,7 +224,7 @@
 	</reporting>
 	<repositories>
 		<repository>
-			<id>repo-release</id>
+			<id>repo-group</id>
 			<url>http://10.131.155.57:8081/repository/mavengroup/</url>
 		</repository>
 		<repository>
