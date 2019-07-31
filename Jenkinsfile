@@ -20,7 +20,9 @@ pipeline {
                     args '-v $HOME/.m2:/root/.m2'
                 }
                 } */           
-                 withMaven(globalMavenSettingsConfig: 'maven-settings'){
+                 withMaven(mavenSettingsConfig: 'maven-settings'){
+                     //mavenSettingsConfig
+                     //globalMavenSettingsConfig
                    // sh 'mvn deploy -Dmaven.test.skip=true'
                   //   sh "mvn clean deploy -s /root/.m2/nexusmaven-settings.xml"
                     //sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
