@@ -7,11 +7,11 @@ pipeline {
         }
     }
     stages {
-        stage("Build"){
+      /*  stage("Build"){
             steps{
                sh "mvn clean package -DskipTests" 
             }
-        }
+        } */
         stage('Deploy') {
             steps {
                   /*agent {
