@@ -12,17 +12,15 @@ pipeline {
                 }
             }
             steps {
-                   /*configFileProvider([configFile(fileId: 'my-maven-settings', variable: 'SETTINGS')]) {
-                    sh "mvn -s $SETTINGS deploy -DskipTests"
-                }*/
-              
-                 withMaven(){
-                     //globalMavenSettingsConfig: 'my-maven-settings'
+                
+                 withMaven(globalMavenSettingsConfig: 'maven-settings'){
+                     //
                      sh "mvn clean package -DskipTests"
                     //sh 'mvn deploy -Dmaven.test.skip=true'
                     //  sh "mvn clean deploy -s /root/.m2/my-settings.xml"
                     //  sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
-                    //sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/my-settings.xml"
+                    echo "############### MAVEN DEPLOY ##########"
+                    sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/settings.xml"
                                        
                  }
             }
