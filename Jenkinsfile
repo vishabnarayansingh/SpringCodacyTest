@@ -11,42 +11,30 @@ pipeline {
        NEXUS_PROTOCOL = "http"
        NEXUS_URL = "10.131.155.57:8081"
        NEXUS_REPOSITORY = "vn-repository"
-       NEXUS_CREDENTIAL_ID = "nexus-user"
+       NEXUS_CREDENTIAL_ID = "nexus"
        NEXUS_PRIVATE_REPO_URL ="10.131.155.57"
-	   NEXUS_REPO_PORT = "8081"
+       NEXUS_REPO_PORT = "8081"
     }
     stages {
-        stage('CheckOut'){
-			    steps{
-			     	script{
-							def scmVars = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitLabCredentials', url: 'https://gitlab.com/recklessrajput23/reactivespringwithmongodb']]])
-							echo "${scmVars}"
-							echo "${scmVars.GIT_COMMIT}"
-							env.GIT_COMMIT = scmVars.GIT_COMMIT
-							def hash = "${env.GIT_COMMIT}"
-							def newHash = hash.substring(0,7);
-                          	echo "HASH :  ${newHash}"
-                          	env.OWN_GIT_HASH = "${newHash}";
-			     	}
-	 }
+  
         stage("Build"){
             steps{
                sh "mvn clean package -DskipTests" 
             }
         } 
-        stage('Deploy To Nexus') {
+      /*  stage('Deploy To Nexus') {
             steps {
-                  /*agent {
+                agent {
                 docker {
                     image 'maven:3-alpine'
                     args '-v $HOME/.m2:/root/.m2'
                 }
-                } */     
+                }    
                 
-                 /*configFileProvider([configFile(fileId: 'bf894b35-0554-479b-9521-187b8545178d', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                 configFileProvider([configFile(fileId: 'bf894b35-0554-479b-9521-187b8545178d', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
                     echo "##### $MAVEN_GLOBAL_SETTINGS}"
                     sh 'mvn -gs $MAVEN_GLOBAL_SETTINGS deploy'
-                } */
+                } 
                 
                  withMaven(globalMavenSettingsConfig: 'ae44493d-0903-4274-b6f4-ef1995f2e0af'){
                      //mavenSettingsConfig
@@ -54,12 +42,17 @@ pipeline {
                    // sh 'mvn deploy -Dmaven.test.skip=true'
                   //   sh "mvn clean deploy -s /root/.m2/nexusmaven-settings.xml"
                     //sh "mvn clean deploy -s /root/.m2/conf/settings.xml"
-                     echo "##### ${WORKSPACE}"
+                   //  echo "##### ${WORKSPACE}"
                    //  sh 'export PATH=$MVN_CMD:$PATH && mvn help:effective-settings'
                    //  sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/settings.xml"
                     //sh "mvn -Dmaven.repo.local=${WORKSPACE}/.repository clean deploy -DskipTests=true -s /root/.m2/settings.xml"
+		 }
+         
                     
-                     stage('Publish To Nexus'){
+                 }
+            } */
+        
+	      stage('Publish To Nexus'){
             steps{
               script{
               		pom = readMavenPom file: "pom.xml";
@@ -83,16 +76,11 @@ pipeline {
 		                        version: "${BUILD_NUMBER}"
 		                       // version: "${pom.version}-${BUILD_NUMBER}-${env.OWN_GIT_HASH}"
 		                  echo '********* Done Publish to NEXUS OSS ************** ' 
-		              	}else {
-                        	error "*** File: ${artifactPath}, could not be found";
+			    }else {
+			    error "*** File: ${artifactPath}, could not be found";
                     	}
                 }
    
             } 
-                    
-                 }
-            }
-        }
-        
     }
 }
