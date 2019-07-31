@@ -19,8 +19,13 @@ pipeline {
                     image 'maven:3-alpine'
                     args '-v $HOME/.m2:/root/.m2'
                 }
-                } */           
-                 withMaven(mavenSettingsConfig: 'maven-settings'){
+                } */     
+                
+                configFileProvider([configFile(fileId: 'bf894b35-0554-479b-9521-187b8545178d', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                    sh 'mvn -gs $MAVEN_GLOBAL_SETTINGS deploy'
+                }
+                
+                 withMaven(globalMavenSettingsConfig: 'bf894b35-0554-479b-9521-187b8545178d'){
                      //mavenSettingsConfig
                      //globalMavenSettingsConfig
                    // sh 'mvn deploy -Dmaven.test.skip=true'
