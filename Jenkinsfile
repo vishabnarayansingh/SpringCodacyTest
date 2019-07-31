@@ -1,5 +1,4 @@
 pipeline {
-    //agent none
     agent {
         docker {
             image 'maven:3-alpine'
@@ -22,7 +21,44 @@ pipeline {
                sh "mvn clean package -DskipTests" 
             }
         } 
-      /*  stage('Deploy To Nexus') {
+        stage('Publish To Nexus'){
+        steps{
+            script{
+                pom = readMavenPom file: "pom.xml";
+                filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                    artifactPath = filesByGlob[0].path;
+                    artifactExists = fileExists artifactPath;
+                    if(artifactExists) {
+                            echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                            nexusArtifactUploader artifacts: 
+                            [
+                                [artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]
+                            ], 
+                            credentialsId: NEXUS_CREDENTIAL_ID, 
+                            groupId: pom.groupId, 
+                            nexusUrl: NEXUS_URL, 
+                            nexusVersion: NEXUS_VERSION, 
+                            protocol: NEXUS_PROTOCOL, 
+                            repository: NEXUS_REPOSITORY, 
+                            //version: pom.version
+                            //version: "${params.TAG_VERSION}"
+                            version: "${BUILD_NUMBER}"
+                            // version: "${pom.version}-${BUILD_NUMBER}-${env.OWN_GIT_HASH}"
+                        echo '********* Done Publish to NEXUS OSS ************** ' 
+                    }else {
+                    error "*** File: ${artifactPath}, could not be found";
+                    }
+                }
+
+                } 
+        }
+    }
+}
+	
+	
+	
+	
+	 /*  stage('Deploy To Nexus') {
             steps {
                 agent {
                 docker {
@@ -51,36 +87,3 @@ pipeline {
                     
                  }
             } */
-        
-	      stage('Publish To Nexus'){
-            steps{
-              script{
-              		pom = readMavenPom file: "pom.xml";
-              		filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-              		 artifactPath = filesByGlob[0].path;
-              		 artifactExists = fileExists artifactPath;
-	                    if(artifactExists) {
-	                    		echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-	                    		nexusArtifactUploader artifacts: 
-		                        [
-		                        	[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]
-		                        ], 
-		                        credentialsId: NEXUS_CREDENTIAL_ID, 
-		                        groupId: pom.groupId, 
-		                        nexusUrl: NEXUS_URL, 
-		                        nexusVersion: NEXUS_VERSION, 
-		                        protocol: NEXUS_PROTOCOL, 
-		                        repository: NEXUS_REPOSITORY, 
-		                        //version: pom.version
-		                        //version: "${params.TAG_VERSION}"
-		                        version: "${BUILD_NUMBER}"
-		                       // version: "${pom.version}-${BUILD_NUMBER}-${env.OWN_GIT_HASH}"
-		                  echo '********* Done Publish to NEXUS OSS ************** ' 
-			    }else {
-			    error "*** File: ${artifactPath}, could not be found";
-                    	}
-                }
-   
-            } 
-    }
-}
