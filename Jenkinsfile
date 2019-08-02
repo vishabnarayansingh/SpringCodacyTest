@@ -15,13 +15,19 @@ pipeline {
 	    agent {
 		docker {
 		    image 'maven:3-alpine'
-		    label 'ssh-slave1'
 		    args '-v $HOME/.m2:/root/.m2'
 		}
 	    } 
             steps{
                sh "mvn clean package -DskipTests" 
             }
+	    post {
+		failure {
+		    script {
+			echo "TestRail failed"
+		    }
+		}
+    	    }
         }
         stage('Publish To Nexus'){
 		steps{
