@@ -1,16 +1,6 @@
 pipeline {
    agent { label 'ssh-slave1' }
-    environment {
-       NEXUS_VERSION = "nexus3"
-       NEXUS_PROTOCOL = "http"
-       NEXUS_URL = "10.131.155.57:8081"
-       NEXUS_REPOSITORY = "vn-repository"
-       NEXUS_CREDENTIAL_ID = "nexus"
-       NEXUS_PRIVATE_REPO_URL ="10.131.155.57"
-       NEXUS_REPO_PORT = "8081"
-    }
     stages {
-  	
         stage("Build"){
 	    agent {
 		docker {
@@ -29,42 +19,9 @@ pipeline {
 		}
     	    }
         }
-        stage('Publish To Nexus'){
-		steps{
-		    script{
-			pom = readMavenPom file: "pom.xml";
-			filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-			    artifactPath = filesByGlob[0].path;
-			    artifactExists = fileExists artifactPath;
-			    if(artifactExists) {
-				    echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-				    nexusArtifactUploader artifacts: 
-				    [
-					[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]
-				    ], 
-				    credentialsId: NEXUS_CREDENTIAL_ID, 
-				    groupId: pom.groupId, 
-				    nexusUrl: NEXUS_URL, 
-				    nexusVersion: NEXUS_VERSION, 
-				    protocol: NEXUS_PROTOCOL, 
-				    repository: NEXUS_REPOSITORY, 
-				    //version: pom.version
-				    //version: "${params.TAG_VERSION}"
-				    version: "${BUILD_NUMBER}"
-				    // version: "${pom.version}-${BUILD_NUMBER}-${env.OWN_GIT_HASH}"
-				echo '********* Done Publish to NEXUS OSS ************** ' 
-			    }else {
-			    error "*** File: ${artifactPath}, could not be found";
-			    }
-			}
-
-			} 
-		}
     }
 }
-	
-	
-	
+		
 	
 	 /*  stage('Deploy To Nexus') {
             steps {
