@@ -15,7 +15,7 @@ pipeline {
 	    agent {
 		docker {
 		    image 'maven:3-alpine'
-		    label 'docker'
+		    label 'ssh-slave1'
 		    args '-v $HOME/.m2:/root/.m2'
 		}
 	    } 
