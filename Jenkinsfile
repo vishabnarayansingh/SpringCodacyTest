@@ -21,14 +21,7 @@ pipeline {
             steps{
                sh "mvn clean package -DskipTests" 
             }
-        } 
-	    
-	stage("Check Agent"){
-		agent {node 'ssh-slave1'}
-		steps{
-			echo "ssh-slave1"
-		}
-	}
+        }
         stage('Publish To Nexus'){
 		steps{
 		    script{
