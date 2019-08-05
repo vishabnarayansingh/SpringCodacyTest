@@ -10,6 +10,7 @@ pipeline {
 	    } 
             steps{
                sh "mvn clean package -DskipTests" 
+	       sh 'echo Build Complete'
             }
 	    post {
 		failure {
