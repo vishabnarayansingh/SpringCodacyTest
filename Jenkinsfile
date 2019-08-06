@@ -1,6 +1,6 @@
 pipeline {
-   //agent { label 'ssh-slave1' }
-   agent { label 'testnodessh' }
+   agent { label 'ssh-slave1' }
+  // agent { label 'testnodessh' }
 	
     stages {
         stage("Build"){
