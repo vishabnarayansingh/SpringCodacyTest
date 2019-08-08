@@ -66,8 +66,8 @@
 	</dependencies>
 	<distributionManagement>
 		<repository>
-			<id>repo-release</id>
-			<url>http://10.131.155.57:8081/repository/RELEASE/</url>
+			<id>my-repo</id>
+			<url>http://10.131.155.57:8081/repository/my-repo/</url>
 		</repository>
 	</distributionManagement>
 	<build>
@@ -224,12 +224,8 @@
 	</reporting>
 	<repositories>
 		<repository>
-			<id>repo-group</id>
-			<url>http://10.131.155.57:8081/repository/mavengroup/</url>
-		</repository>
-		<repository>
-			<id>repo-release</id>
-			<url>http://10.131.155.57:8081/repository/RELEASE/</url>
+			<id>my-repo</id>
+			<url>http://10.131.155.57:8081/repository/my-repo-maven-group/</url>
 		</repository>
 	</repositories>
 </project>
